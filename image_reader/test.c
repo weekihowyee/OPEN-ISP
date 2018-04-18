@@ -6,7 +6,7 @@ void config_image_buffer(image_reader_buf_t *image_buf)
 	image_buf->width  = 4608;
 	image_buf->height = 3456;
 	image_buf->type   = 0;
-
+	image_buf->normal_buf.need_free_by_app = 1;
 }
 
 int main(int argc,char *argv[])
