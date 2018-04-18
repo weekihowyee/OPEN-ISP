@@ -12,8 +12,17 @@ static int yuv_420_reader(int fd,image_reader_buf_t *frame)
 
 static int dump_raw_origin(image_reader_buf_t *frame)
 {
+	int fd;
+	char name[128];
 	
+	snprintf(name, sizeof(name), TEST_FILE_LOCATION"test_%d.raw",frame->type);
+	fd = open(name,O_RDWR | O_CREAT, 0777);
 	
+	write(fd,frame->buf,frame->length);
+	
+	sync();
+	
+	close(fd);
 	
 	return 0;
 }
@@ -35,7 +44,7 @@ static int mipi_10_raw_reader(int fd,image_reader_buf_t *frame)
 	
 	if(ORIGIN_DUMP)
 	{
-		
+		dump_raw_origin(frame);
 	}
 	
 	return 0;
